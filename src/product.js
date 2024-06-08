@@ -3,7 +3,7 @@ import "./product.css"
 import { IoMdStar } from "react-icons/io";
  
  
-let Product=({title,rating,img,cost,weight})=>{
+let Product=({r})=>{
     const [click,setClick]=useState(null)
     let count=()=>{
         setClick(click+1)
@@ -14,16 +14,16 @@ let Product=({title,rating,img,cost,weight})=>{
         <div className='product-full'>
  
         <div className='product'>
-                 <img src={img} alt="chick"/>
+                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+r.info.cloudinaryImageId} alt="chick"/>
             <div className='product-description'>
-                <p className='pname'>{title}</p>
+                <p className='pname'>{r.info.name}</p>
                 <div className="staring">
                     <IoMdStar style={{color:"gold"}}/>
-                <span>{rating}</span>
+                <span>{r.info.avgRating}</span>
                 </div>
-                <p className='pweight'>{weight}g</p>
+                <p className='pweight'>{}g</p>
                 <div className="range">
-                <p className='price'>₹{cost}</p>
+                <p className='price'>₹{r.info.price}</p>
                 <button className='Add-button'onClick={count}>Add<span style={{marginLeft:"10px"}}>+{click}</span></button>  
             </div>                                                                     
             </div>
