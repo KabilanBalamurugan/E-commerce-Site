@@ -68,3 +68,185 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+import React, { useState } from 'react'
+import Product from './product'
+import "./Browse.css"
+import { listItems } from './product-data'
+
+
+const Browse=()=>{
+
+  let Data=listItems;
+  const[listOfRes,setListOfRes]=useState(Data);
+  console.log(listOfRes)
+
+
+  return(
+    <>
+    <div className='filter-bbtn'> 
+     <button className='filter-btn' onClick={() => {
+      let filteredRes = listOfRes.filter((e) => e.info.avgRating > 4.5);
+      setListOfRes(filteredRes)
+     }}>   
+     FILTER
+     </button>
+    </div>
+    <body>
+    
+        
+      {listOfRes.map((res) => (<Product r={res}/>))}
+    </body>
+    </>
+  )
+}
+
+export default Browse
+
+
+
+
+
+body {
+    /* max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #ad9e91;
+
+}
+
+
+
+
+import React, { useState } from "react";
+import "./product.css"
+import { IoMdStar } from "react-icons/io";
+ 
+ 
+let Product=({r})=>{
+    const [click,setClick]=useState(null)
+    let count=()=>{
+        setClick(click+1)
+    }
+ 
+ 
+    return(
+        <div className='product-full'>
+ 
+        <div className='product'>
+                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+r.info.cloudinaryImageId} alt="chick"/>
+            <div className='product-description'>
+                <p className='pname'>{r.info.name}</p>
+                <div className="staring">
+                    <IoMdStar style={{color:"gold"}}/>
+                <span>{r.info.avgRating}</span>
+                </div>
+                <p className='pweight'>{r.info.Weight}g</p>
+                <div className="range">
+                <p className='price'>₹{r.info.price}</p>
+                <button className='Add-button'onClick={count}>Add<span style={{marginLeft:"10px"}}>+{click}</span></button>  
+            </div>                                                                     
+            </div>
+        </div>
+    </div>
+    )
+}
+export default Product
+ 
+ 
+ 
+
+
+
+ .product-full{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; Set the height to fill the viewport */
+    margin: 15px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+background-color: rgb(255, 255, 255);
+
+}
+.product{
+        /* height: 254.594px;
+        width: 229.203px; */
+    border-radius: 5px;
+}
+.product:hover{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.product-img{
+    width: 100%;
+    height: 152.797px;
+}
+.product-description{
+margin-left: 10px;
+padding: 15px;
+ 
+}
+.product-description .pname{
+margin-top: 4px;
+font-weight: 700;
+}
+.product-description .staring{
+    display: flex;
+    justify-content: flex-start;
+/* margin-top: 2px; */
+/* font-weight: 400; */
+}
+.product-description .pweight{
+margin-top: 2px;
+font-weight: 400;
+}
+.product-description .price{
+font-weight: bold;
+}
+.product-description .Add-button{
+background-color: red;
+border-radius: 5px;
+color: white;
+width: 100px;
+}
+.range{
+    display: flex;
+    justify-content: space-between;
+    /* padding-left: 150px; */
+}
+.cartbutton{
+    display: flex;
+    justify-content: space-between;
+}
+.filter-btn{
+    
+    color: white;
+    padding: 7px;
+    margin: 10px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 20px;
+    animation-name: filter;
+    animation-duration: 5s;
+    background-color:crimson;
+    opacity: 0.5;
+    transition: 0.4s;
+    
+}
+.filter-bbtn{
+    margin: 15px;
+   
+}
+.filter-btn:hover{
+    opacity: 1;
+}
+
